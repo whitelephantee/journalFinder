@@ -1,0 +1,81 @@
+body {
+    background-color: #FAF6F0;
+    font-family: Gelasio, sans-serif;
+    color: #B2A599;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 10px;
+    width: 50%;
+    justify-content: space-between; /* 调整按钮位置 */
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 80%;
+    font-size: 16px;
+    color: #B2A599;
+}
+
+.search-box button {
+    background-color: #7F674D;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.toggle div {
+    border: 1px solid #7F674D;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.toggle .active {
+    background-color: #FAF6F0;
+}
+
+.results {
+    width: 70%;
+    margin-top: 20px;
+}
+
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.results th, .results td {
+    border-bottom: 1px solid #B2A599;
+    padding: 10px;
+    text-align: left;
+}
+
+.results a {
+    color: #7F674D;
+    text-decoration: none;
+}
+
+.results a:hover {
+    text-decoration: underline;
+}

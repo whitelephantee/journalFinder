@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="toggle">
+            <div id="keyword-toggle" class="active" onclick="toggleSearch('keyword')">Keyword</div>
+            <div id="abstract-toggle" onclick="toggleSearch('abstract')">Abstract</div>
+        </div>
+        <form class="search-box" method="post" action="/search">
+            <input type="text" name="query" id="search-input" placeholder="Enter your keyword..." value="{{ query if query else '' }}">
+            <input type="hidden" name="type" id="search-type" value="{{ search_type if search_type else 'keyword' }}">
+            <button type="submit" style="margin-left: 10px;">Match</button> <!-- 调整按钮位置 -->
+        </form>
+        <div class="results" id="results">
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% elif results is not undefined and not results.empty %}
+                <table>
+                    <tr><th>期刊名称</th><th>影响因子</th><th>5年影响因子</th><th>分区</th><th>类别</th><th>接受率</th><th>平均审稿时长</th></tr>
+                    {% for index, row in results.iterrows() %}
+                    <tr>
+                        <td><a href="/journal_detail.html?name={{ row['Journal Name'] | title }}">{{ row['Journal Name'] }}</a></td>
+                        <td>{{ row['jif'] }}</td>
+                        <td>{{ row['jif5Years'] }}</td>
+                        <td>{{ row['fiveYearJifQuartile'] }}</td>
+                        <td>{{ row['category'] }}</td>
+                        <td>{{ row['Acceptance Rate'] }}</td>
+                        <td>{{ row['Decision Duration'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div style="margin-bottom: 50px;"></div> <!-- 添加margin -->
+            {% else %}
+                <p>没有查询到匹配结果，您可以尝试更换关键词或使用摘要进行匹配。</p>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        function toggleSearch(type) {
+            document.getElementById('keyword-toggle').classList.remove('active');
+            document.getElementById('abstract-toggle').classList.remove('active');
+            if (type === 'keyword') {
+                document.getElementById('keyword-toggle').classList.add('active');
+                document.getElementById('keyword-toggle').style.backgroundColor = '#FAF6F0';
+                document.getElementById('abstract-toggle').style.backgroundColor = '#FFFFFF';
+                document.getElementById('search-input').placeholder = 'Enter your keyword...';
+                document.getElementById('search-type').value = 'keyword';
+            } else {
+                document.getElementById('abstract-toggle').classList.add('active');
+                document.getElementById('abstract-toggle').style.backgroundColor = '#FAF6F0';
+                document.getElementById('keyword-toggle').style.backgroundColor = '#FFFFFF';
+                document.getElementById('search-input').placeholder = 'Enter your abstract...';
+                document.getElementById('search-type').value = 'abstract';
+            }
+        }
+
+        // 设置默认的背景颜色
+        document.getElementById('keyword-toggle').style.backgroundColor = '#FAF6F0';
+        document.getElementById('abstract-toggle').style.backgroundColor = '#FFFFFF';
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ journal['Journal Name'] | title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            background-color: #FAF6F0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .journal-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-transform: capitalize; /* 确保首字母大写 */
+        }
+        .journal-info {
+            width: 90%; /* 调整宽度 */
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .journal-info div {
+            width: 50%;
+            padding: 10px;
+        }
+        .journal-info div:nth-child(odd) {
+            border-right: 1px solid #B2A599;
+        }
+        .journal-info div:not(:last-child) {
+            border-bottom: 1px solid #B2A599;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="journal-title">{{ journal['Journal Name'] | title }}</div>
+        <div class="journal-info">
+            {% if journal['期刊简介'] and journal['期刊简介'] != 'nan' %}<div>期刊介绍：{{ journal['期刊简介'] }}</div>{% endif %}
+            {% if journal['引用量'] and journal['引用量'] != 'nan' %}<div>引用量：{{ journal['引用量'] }}</div>{% endif %}
+            {% if journal['发文领域关键词'] and journal['发文领域关键词'] != 'nan' %}<div>发文领域关键词：{{ journal['发文领域关键词'] }}</div>{% endif %}
+            {% if journal['无自引引用量'] and journal['无自引引用量'] != 'nan' %}<div>无自引引用量：{{ journal['无自引引用量'] }}</div>{% endif %}
+            {% if journal['类别'] and journal['类别'] != 'nan' %}<div>类别：{{ journal['类别'] }}</div>{% endif %}
+            {% if journal['影响因子'] and journal['影响因子'] != 'nan' %}<div>影响因子：{{ journal['影响因子'] }}</div>{% endif %}
+            {% if journal['Aim and Scope'] and journal['Aim and Scope'] != 'nan' %}<div>Aim and Scope：{{ journal['Aim and Scope'] }}</div>{% endif %}
+            {% if journal['接受率'] and journal['接受率'] != 'nan' %}<div>接受率：{{ journal['接受率'] }}</div>{% endif %}
+            {% if journal['5年影响因子'] and journal['5年影响因子'] != 'nan' %}<div>5年影响因子：{{ journal['5年影响因子'] }}</div>{% endif %}
+            {% if journal['分区'] and journal['分区'] != 'nan' %}<div>分区：{{ journal['分区'] }}</div>{% endif %}
+            {% if journal['数据库'] and journal['数据库'] != 'nan' %}<div>数据库：{{ journal['数据库'] }}</div>{% endif %}
+            {% if journal['出版社'] and journal['出版社'] != 'nan' %}<div>出版社：{{ journal['出版社'] }}</div>{% endif %}
+            {% if journal['国际标准简称'] and journal['国际标准简称'] != 'nan' %}<div>国际标准简称：{{ journal['国际标准简称'] }}</div>{% endif %}
+            {% if journal['WOS简称'] and journal['WOS简称'] != 'nan' %}<div>WOS简称：{{ journal['WOS简称'] }}</div>{% endif %}
+            {% if journal['创刊时间'] and journal['创刊时间'] != 'nan' %}<div>创刊时间：{{ journal['创刊时间'] }}</div>{% endif %}
+            {% if journal['所属国家'] and journal['所属国家'] != 'nan' %}<div>所属国家：{{ journal['所属国家'] }}</div>{% endif %}
+            {% if journal['语言'] and journal['语言'] != 'nan' %}<div>语言：{{ journal['语言'] }}</div>{% endif %}
+            {% if journal['开源占比'] and journal['开源占比'] != 'nan' %}<div>开源占比：{{ journal['开源占比'] }}</div>{% endif %}
+            {% if journal['国人占比'] and journal['国人占比'] != 'nan' %}<div>国人占比：{{ journal['国人占比'] }}</div>{% endif %}
+            {% if journal['出版周期'] and journal['出版周期'] != 'nan' %}<div>出版周期：{{ journal['出版周期'] }}</div>{% endif %}
+            {% if journal['版面费'] and journal['版面费'] != 'nan' %}<div>版面费：{{ journal['版面费'] }}</div>{% endif %}
+            {% if journal['作者指南'] and journal['作者指南'] != 'nan' %}<div>作者指南：<a href="{{ journal['作者指南'] }}" target="_blank">{{ journal['作者指南'] }}</a></div>{% endif %}
+            {% if journal['投稿页面'] and journal['投稿页面'] != 'nan' %}<div>投稿页面：<a href="{{ journal['投稿页面'] }}" target="_blank">{{ journal['投稿页面'] }}</a></div>{% endif %}
+        </div>
+    </div>
+</body>
+</html>
